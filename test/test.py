@@ -28,48 +28,48 @@ async def test_project(dut):
     # Set the input values you want to test
     dut.ui_in.value = 36
     dut.uio_in.value = 0 #addition
-
+    await ClockCycles(dut.clk, 1)
     # Wait for one clock cycle to see the output values
    
     # The following assersion is just an example of how to check the output values.
     # Change it to match the actual expected output of your module:
     assert dut.uo_out.value == 6
-    await ClockCycles(dut.clk, 1)
+    
 
     # Keep testing the module by changing the input values, waiting for
     # one or more clock cycles, and asserting the expected output values.
 
     dut.ui_in.value = 36
     dut.uio_in.value = 1 #subtraction
-    assert dut.uo_out.value == 2
     await ClockCycles(dut.clk, 1)
-
+    assert dut.uo_out.value == 2
+    
     dut.ui_in.value = 36
     dut.uio_in.value = 2 #and
-    assert dut.uo_out.value == 0
     await ClockCycles(dut.clk, 1)
-
+    assert dut.uo_out.value == 0
+    
     dut.ui_in.value = 36
     dut.uio_in.value = 3 #or
-    assert dut.uo_out.value == 6
     await ClockCycles(dut.clk, 1)
+    assert dut.uo_out.value == 6
 
     dut.ui_in.value = 36
     dut.uio_in.value = 4 #xor
-    assert dut.uo_out.value == 6
     await ClockCycles(dut.clk, 1)
+    assert dut.uo_out.value == 6
 
     dut.ui_in.value = 36
     dut.uio_in.value = 5 #not
-    assert dut.uo_out.value == 219
     await ClockCycles(dut.clk, 1)
+    assert dut.uo_out.value == 219
 
     dut.ui_in.value = 36
     dut.uio_in.value = 6 #multiply
-    assert dut.uo_out.value == 8
     await ClockCycles(dut.clk, 1)
+    assert dut.uo_out.value == 8
 
     dut.ui_in.value = 36
     dut.uio_in.value = 7 #divide
-    assert dut.uo_out.value == 2
     await ClockCycles(dut.clk, 1)
+    assert dut.uo_out.value == 2
