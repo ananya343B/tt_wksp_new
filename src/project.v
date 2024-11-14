@@ -10,14 +10,39 @@ module tt_um_example (
     input  wire       rst_n     
 );
   
-  
+  reg [3:0] in1,in2;
+  reg [7:0] alu_out_reg;
+  wire [7:0] alu_out;
 
   // All output pins must be assigned. If not used, assign to 0.
 //  assign uo_out  = ui_in + uio_in;  // Example: ou_out is the sum of ui_in and uio_in
   assign uio_out = 0;
   assign uio_oe  = 0;
-  alu submodule(.a(ui_in[3:0]),.b(ui_in[7:4]),.alu_sel(uio_in[2:0]),.result(uo_out),.clk(clk),.rst_n(rst_n));
-  
+//input registers
+always @(posedge clk) begin
+  if(!rst_n) begin
+   in1 <= 4'b0;
+   in2 <= 4'b0;
+  end
+  else begin
+   in1 <= ui_in[3:0];
+   in2 <= ui_in[7:4];
+  end
+end
+
+  alu submodule(.a(in1),.b(in2),.alu_sel(uio_in[2:0]),.result(alu_out),.clk(clk),.rst_n(rst_n));
+
+ //output register
+always @(posedge clk)begin
+  if(!rst_n)begin
+    alu_out_reg <=8'b0;
+  end
+  else begin
+    alu_out_reg <= alu_out;
+  end
+end
+
+  assign uo_out = alu_out_reg;
   // List all unused inputs to prevent warnings
   wire unused = &{ena,uio_in[7:3],1'b0};
 
