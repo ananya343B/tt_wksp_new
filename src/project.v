@@ -58,7 +58,7 @@ module alu (
     output reg [7:0] result   
 );
 
-always @(posedge clk) begin
+    always @(*) begin
 if(rst_n == 0)
 result = 8'b0;
 else begin
