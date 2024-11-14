@@ -30,7 +30,7 @@ always @(posedge clk) begin
   end
 end
 
-  alu submodule(.a(in1),.b(in2),.alu_sel(uio_in[2:0]),.result(alu_out),.clk(clk),.rst_n(rst_n));
+  alu submodule(.a(in1),.b(in2),.alu_sel(uio_in[2:0]),.result(alu_out));
 
  //output register
 always @(posedge clk)begin
@@ -50,18 +50,16 @@ endmodule
 
 
 module alu (
-    input clk,
-    input rst_n,
+    
+    
     input [3:0] a,            
     input [3:0] b,            
     input [2:0] alu_sel,      
     output reg [7:0] result   
 );
 
-    always @(posedge clk) begin
-if(rst_n == 0)
-result = 8'b0;
-else begin
+    always @(*) begin
+
     case (alu_sel)
         3'b000: result = a + b;                        // Addition
         3'b001: result = a - b;                        // Subtraction
@@ -80,6 +78,6 @@ else begin
         default: result = 8'b00000000;                 // Default case
     endcase
 end
-end
+
 
 endmodule
