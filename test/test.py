@@ -28,7 +28,7 @@ async def test_project(dut):
     # Set the input values you want to test
     dut.ui_in.value = 36
     dut.uio_in.value = 0 #addition
-    await ClockCycles(dut.clk, 2)
+    await ClockCycles(dut.clk, 3)
     # Wait for one clock cycle to see the output values
    
     # The following assersion is just an example of how to check the output values.
@@ -41,35 +41,35 @@ async def test_project(dut):
 
     dut.ui_in.value = 36
     dut.uio_in.value = 1 #subtraction
-    await ClockCycles(dut.clk, 2)
+    await ClockCycles(dut.clk, 3)
     assert dut.uo_out.value == 2
     
     dut.ui_in.value = 36
     dut.uio_in.value = 2 #and
-    await ClockCycles(dut.clk, 2)
+    await ClockCycles(dut.clk, 3)
     assert dut.uo_out.value == 0
     
     dut.ui_in.value = 36
     dut.uio_in.value = 3 #or
-    await ClockCycles(dut.clk, 2)
+    await ClockCycles(dut.clk, 3)
     assert dut.uo_out.value == 6
 
     dut.ui_in.value = 36
     dut.uio_in.value = 4 #xor
-    await ClockCycles(dut.clk, 2)
+    await ClockCycles(dut.clk, 3)
     assert dut.uo_out.value == 6
 
     dut.ui_in.value = 36
     dut.uio_in.value = 5 #not
-    await ClockCycles(dut.clk, 2)
+    await ClockCycles(dut.clk, 3)
     assert dut.uo_out.value == 219
 
     dut.ui_in.value = 36
     dut.uio_in.value = 6 #multiply
-    await ClockCycles(dut.clk, 2)
+    await ClockCycles(dut.clk, 3)
     assert dut.uo_out.value == 8
 
     dut.ui_in.value = 36
     dut.uio_in.value = 7 #divide
-    await ClockCycles(dut.clk, 2)
+    await ClockCycles(dut.clk, 3)
     assert dut.uo_out.value == 2
