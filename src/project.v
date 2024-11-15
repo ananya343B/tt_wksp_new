@@ -11,6 +11,7 @@ module tt_um_example (
 );
   
   reg [3:0] in1,in2;
+    reg [2:0] sel;
   reg [7:0] alu_out_reg;
   wire [7:0] alu_out;
 
@@ -23,14 +24,16 @@ always @(posedge clk) begin
   if(!rst_n) begin
    in1 <= 4'b0;
    in2 <= 4'b0;
+   sel <= 3'b0;
   end
   else begin
    in1 <= ui_in[3:0];
    in2 <= ui_in[7:4];
+   sel <= uio_in[2:0];
   end
 end
 
-  alu submodule(.a(in1),.b(in2),.alu_sel(uio_in[2:0]),.result(alu_out));
+    alu submodule(.a(in1),.b(in2),.alu_sel(sel),.result(alu_out));
 
  //output register
 always @(posedge clk)begin
